@@ -53,7 +53,7 @@ class UserFixtures extends Fixture
             $user->setLastConnection($faker->dateTimeThisMonth());
             $user->setHasMood($moods[array_rand($moods)]); // Assigner un mood aléatoire
             $user->setHasRole($roles[array_rand($roles)]); // Assigner un rôle aléatoire
-
+            
             // Hacher le mot de passe
             $user->setPassword($this->passwordHasher->hashPassword(
                 $user,
