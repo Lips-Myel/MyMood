@@ -1,7 +1,11 @@
 api_platform:
-    title: Hello API Platform
-    version: 1.0.0
+    title: "Hello API Platform"
+    version: "1.0.0"
     defaults:
         stateless: true
         cache_headers:
             vary: ['Content-Type', 'Authorization', 'Origin']
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity'] # Indique où se trouvent vos entités
+    enable_swagger_ui: true # Activer l'interface Swagger
+    enable_docs: true       # Activer la documentation interactive
