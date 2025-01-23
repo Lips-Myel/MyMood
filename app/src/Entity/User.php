@@ -9,13 +9,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
-
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -34,9 +32,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $role = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $last_connection = null;
 
@@ -45,9 +40,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'my_mood')]
     private ?Mood $has_mood = null;
-
-    // Constructeur pour injecter PasswordHasherInterface
-    private PasswordHasherInterface $passwordHasher;
 
     #[ORM\OneToOne(mappedBy: 'alert_between', cascade: ['persist', 'remove'])]
     private ?CallAlerts $callAlerts = null;
@@ -62,9 +54,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Cohortes::class, mappedBy: 'Cohortes_Member')]
     private Collection $cohortes;
 
-    public function __construct(PasswordHasherInterface $passwordHasher)
+    public function __construct()
     {
-        $this->passwordHasher = $passwordHasher;
         $this->cohortes = new ArrayCollection();
     }
 
@@ -81,16 +72,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        // Retourne un tableau de rôles, en s'assurant que l'utilisateur a un rôle de base
-        $roles = [$this->role ?: 'ROLE_USER'];  // Par défaut ROLE_USER
-        return array_unique($roles); // Enlever les doublons potentiels
-    }
-
-    public function setRoles(array $roles): static
-    {
-        // Si vous avez besoin de gérer plusieurs rôles
-        $this->role = implode(',', $roles);  // Exemple : 'ROLE_ADMIN,ROLE_USER'
-        return $this;
+        return [$this->has_role->getName()];  // Renvoie le nom du rôle
     }
 
     public function getPassword(): string
@@ -100,8 +82,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPassword(string $password): static
     {
-        // Hachez le mot de passe avant de le stocker
-        $this->password = $this->passwordHasher->hash($password);
+        $this->password = $password;
         return $this;
     }
 
@@ -152,17 +133,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): static
-    {
-        $this->role = $role;
         return $this;
     }
 
