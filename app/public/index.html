@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>MyMoodApp - Application de Visualisation d'Humeur</title>
-    <script src="./js/login.js" defer></script>
+    <!-- <script src="./js/login.js" defer></script> -->
 
     <link rel="stylesheet" href="./css/root.css">
     <link rel="stylesheet" href="./css/index.css">
@@ -15,17 +15,21 @@
 <body>
     <header></header>
     <main>
-        <div>
+        <div id="div-welcome">
             <p>bienvenue sur</p>
             <h1>MyMoodApp</h1>
         </div>
 
         <form action="" id="login-form">
-            <label for="login-username">Identifiant</label>
-            <input type="text" id="login-username" required>
+            <div class="login-input">
+                <label for="login-username">Identifiant</label>
+                <input type="text" id="login-username" class="text-input" placeholder="Identifiant" required>
+            </div>
 
-            <label for="login-password">Mot de passe</label>
-            <input type="password" id="login-password" required>
+            <div class="login-input">
+                <label for="login-password">Mot de passe</label>
+                <input type="password" id="login-password" class="text-input" placeholder="Mot de passe" required>
+            </div>
 
             <input type="submit" id="login-submit" value="connexion" class="red-button">
         </form>
