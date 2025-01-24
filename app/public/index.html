@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <script src="./js/script.js" defer></script>
-    <title>MyMoodApp</title>
+    
+    <title>MyMoodApp - Application de Visualisation d'Humeur</title>
+    <script src="./js/login.js" defer></script>
+
+    <link rel="stylesheet" href="./css/root.css">
+    <link rel="stylesheet" href="./css/index.css">
 </head>
+
 <body>
-    <h1>MyMood</h1>
-    <h2>hello World</h2>
+    <header></header>
+    <main>
+        <div>
+            <p>bienvenue sur</p>
+            <h1>MyMoodApp</h1>
+        </div>
+
+        <form action="" id="login-form">
+            <label for="login-username">Identifiant</label>
+            <input type="text" id="login-username" required>
+
+            <label for="login-password">Mot de passe</label>
+            <input type="password" id="login-password" required>
+
+            <input type="submit" id="login-submit" value="connexion" class="red-button">
+        </form>
+    </main>
 </body>
+
 </html>
