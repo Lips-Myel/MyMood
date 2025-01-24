@@ -9,11 +9,14 @@
     --color-imts-blue: #1E1C59;
     --color-imts-red: #D91E41;
     --color-imts-background: #EFF2F7;
+    --color-white-background: #FFF;
 
     --color-mood-green: #9EE258;
     --color-mood-yellow: #FFD25E;
 
-    --box-shadow: rgba(30, 28, 89, 0.3) 0px 1px 2px 0px, rgba(30, 28, 89, 0.15) 0px 2px 6px 2px;
+    --box-shadow: rgba(30, 28, 89, 0.1) 0px 1px 2px 0px;
+    --gradient-mood: linear-gradient(90deg, rgba(217, 30, 65, 1) 0%, rgba(255, 210, 94, 1) 50%, rgba(158, 226, 88, 1) 100%);
+
 }
 
 /* reset css  */
@@ -30,17 +33,48 @@ h1 {
 
 p {
     font-family: var(--font-paragraphes);
+    font-size: 16px;
 }
 
 /* elements */
 .red-button {
     color: white;
     font-family: var(--font-paragraphes);
+    font-weight: bold;
 
     background-color: var(--color-imts-red);
+    padding: 8px 24px;
     border: none;
     border-radius: 2px;
+
+}
+
+.button {
+    /* Add text color */
+    font-family: var(--font-paragraphes);
+    font-weight: bold;
+
+    /* Add background color */
     padding: 8px 24px;
+    border: none;
+    border-radius: 2px;
+}
+
+.text-input {
+    font-family: var(--font-paragraphes);
+
+    padding: 8px;
+    border: none;
+    border-radius: 2px;
+
+}
+
+.white-zone {
+    background-color: var(--color-white-background);
+    box-shadow: var(--box-shadow);
+    border-radius: 8px;
+    padding: 24px;
+    color: var(--color-imts-blue);
 }
 
 /* header */
@@ -49,6 +83,3 @@ header {
     width: 100vw;
     background-color: var(--color-imts-blue);
 }
-
-
-
