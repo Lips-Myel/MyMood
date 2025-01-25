@@ -2,46 +2,50 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         users_in_memory: { memory: null }
+        # Si vous utilisez une base de données, vous devrez ajouter un provider basé sur votre entité User
+        users_in_db:
+            entity:
+                class: App\Entity\User
+                property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         main:
             lazy: true
-            provider: users_in_memory
+            provider: users_in_db  # Utilisez users_in_db si vous utilisez une base de données
             form_login:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
             logout:
                 path: app_logout
-                # where to redirect after logout
                 # target: app_any_route
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
+            # Vous pouvez activer d'autres méthodes d'authentification si nécessaire
+            # guard:
+            #   authenticators:
+            #     - App\Security\CustomAuthenticator
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+    # Vous pouvez également spécifier les règles de sécurité pour accéder à certaines parties du site en fonction des rôles
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # Règles d'accès pour les différents rôles
+        - { path: ^/Administrateur, roles: ROLE_ADMIN }
+        - { path: ^/Superviseur, roles: ROLE_SUPERVISOR }
+        - { path: ^/Étudiant, roles: ROLE_STUDENT }
 
+    # Configuration de sécurité pour les tests
 when@test:
     security:
         password_hashers:
-            # By default, password hashers are resource intensive and take time. This is
-            # important to generate secure password hashes. In tests however, secure hashes
-            # are not important, waste resources and increase test times. The following
-            # reduces the work factor to the lowest possible values.
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
                 algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
+                cost: 4 # Valeur la plus basse pour bcrypt
+                time_cost: 3 # Valeur la plus basse pour argon
+                memory_cost: 10 # Valeur la plus basse pour argon

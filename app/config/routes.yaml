@@ -11,4 +11,7 @@ index:
         route: /index.html
         permanent: true
 
+app_login:
+    path: /api/login
+    controller: App\Controller\SecurityController::login
 

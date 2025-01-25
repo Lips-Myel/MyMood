@@ -52,6 +52,7 @@ class SecurityController extends AbstractController
         $jwt = $this->jwtManager->createJWT($user);
 
         // Déterminer le rôle de l'utilisateur et rediriger en conséquence
+        /*
         $role = $user->getHasRole()->getName();
         switch ($role) {
             case 'Étudiant':
@@ -63,17 +64,15 @@ class SecurityController extends AbstractController
             case 'Administrateur':
                 $route = 'admin_dashboard';
                 break;
-            default:
-                $route = 'default_dashboard';
-                break;
         }
+        */
 
-        // Retourner le JWT avec une réponse JSON et redirection
+        // Retourner le JWT avec une réponse JSON
         return new JsonResponse([
             'success' => true,
             'message' => 'Connection réussie',
             'token' => $jwt,
-            'redirect' => $this->generateUrl($route),
+            // 'redirect' => $this->generateUrl($route),
         ]);
     }
 

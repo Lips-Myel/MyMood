@@ -2,14 +2,13 @@
 namespace App\Controller;
 
 use App\Repository\CohortesRepository;
-use App\Repository\CohortRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CohortController extends AbstractController
 {
-    #[Route('api/cohorts', name: 'get_cohorts', methods: ['GET'])]
+    #[Route('api/cohortes', name: 'get_cohorts', methods: ['GET'])]
     public function getCohorts(CohortesRepository $cohortRepository): JsonResponse
     {
         $supervisor = $this->getUser(); // Assume que le superviseur est l'utilisateur connecté
