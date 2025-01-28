@@ -1,12 +1,14 @@
 nelmio_cors:
     defaults:
-        allow_origin: ['https://localhost:443']  # Remplacez par l'origine de votre frontend
+        allow_origin: ['https://localhost']  # Remplacez par l'origine de votre frontend
         allow_headers: ['Content-Type', 'Authorization']
         allow_methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
         max_age: 3600
+        allow_credentials: true  # Autorise l'envoi de cookies
     paths:
         '^/api/':
-            allow_origin: ['https://localhost:443']  # Remplacez par l'origine de votre frontend
+            allow_origin: ['https://localhost']  # Remplacez par l'origine de votre frontend
             allow_headers: ['Content-Type', 'Authorization']
             allow_methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+            expose_headers: ['Link']
             allow_credentials: true  # Autorise l'envoi de cookies
