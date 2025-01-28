@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MyMoodApp - Application de Visualisation d'Humeur</title>
+        <link rel="stylesheet" href="./css/root.css">
+        <link rel="stylesheet" href="./css/index.css">
+    </head>
+<body>
+    <h1>MyMood</h1>
+    <h2>Student_Dashboard</h2>
+    
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cookieString = document.cookie;
+        const tokenCookie = cookieString.split('; ').find(row => row.startsWith('token='));
+
+        if (!tokenCookie) {
+            window.location.href = '/';
+            return;
+        }
+
+        const token = tokenCookie.split('=')[1];
+
+        fetch('/api/validate-token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.valid) {
+                window.location.href = '/';
+            }
+        })
+        .catch(error => {
+                console.error('Erreur de validation du token:', error);
+                window.location.href = '/';
+            });
+        });
+</script>
+</html>

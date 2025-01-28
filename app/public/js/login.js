@@ -4,37 +4,48 @@ document.querySelector('#login-form').addEventListener('submit', async (event) =
     const email = document.querySelector('#login-username').value;
     const password = document.querySelector('#login-password').value;
 
+    // Validation des champs
+    if (!email || !password) {
+        alert('Veuillez entrer une adresse e-mail et un mot de passe.');
+        return;
+    }
+
     const loginParams = {
-        method: 'POST', // Méthode POST
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/ld+json', // Type de contenu
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }), // Données envoyées au serveur
-        credentials: 'include' // Ajoutez cela si vous envoyez des cookies
+        body: JSON.stringify({ email, password }),
+        credentials: 'include',
     };
 
     try {
         const response = await fetch('/api/login', loginParams);
-        const data = await response.json();
-
-        if (response.ok) {
-            // Connexion réussie, afficher un message de succès dans la console
-            console.log('Connexion réussie:', data);
-
-            // Redirection automatique basée sur le serveur (commentée)
-            // if (data.redirect) {
-            //     window.location.href = data.redirect; 
-            // }
-
-            // Redirection fixe vers dashboard.html
-            window.location.href = 'dashboard.html';
-        } else {
-            // Afficher un message d'erreur
-            console.error('Erreur de connexion:', data);
-            alert(data.message || 'Erreur de connexion');
+    
+        if (!response.ok) {
+            console.error('Erreur serveur:', response.status);
+            alert('Erreur lors de la connexion au serveur.');
+            return;
         }
+    
+        const data = await response.json();
+        console.log('Réponse:', data);
+
+        //Redirection selon le rôle utilisateur
+        const userRoles = data.user.roles;
+        if (userRoles.includes('Administrateur')) {
+            window.location.href = '/admin_dashboard.html';
+        } else if (userRoles.includes('Superviseur')) {
+            window.location.href = '/supervisor_dashboard.html';
+        } else if (userRoles.includes('Étudiant')) {
+            window.location.href = '/student_dashboard.html';
+        } else {
+            alert('Rôle utilisateur non reconnu.');
+            window.location.href = '/';
+        }
+
     } catch (error) {
         console.error('Erreur réseau:', error);
-        alert('Erreur réseau, veuillez réessayer plus tard.');
+        alert(error.message || 'Erreur réseau, veuillez réessayer plus tard.');
     }
 });
