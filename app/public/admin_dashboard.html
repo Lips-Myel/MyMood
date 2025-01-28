@@ -13,34 +13,22 @@
 </body>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const cookieString = document.cookie;
-        const tokenCookie = cookieString.split('; ').find(row => row.startsWith('token='));
-
-        if (!tokenCookie) {
-            window.location.href = '/';
-            return;
+    fetch('/dashboard', {
+        method: 'GET',
+        credentials: 'include'
+    })
+    .then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+        } else {
+            return response.json();
         }
-
-        const token = tokenCookie.split('=')[1];
-
-        fetch('/api/validate-token', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ token }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (!data.valid) {
-                window.location.href = '/';
-            }
-        })
-        .catch(error => {
-                console.error('Erreur de validation du token:', error);
-                window.location.href = '/';
-            });
-        });
+    })
+    .then(data => {
+        if (data) {
+            console.log('Données reçues :', data);
+        }
+    })
+    .catch(error => console.error('Erreur :', error));
 </script>
 </html>
