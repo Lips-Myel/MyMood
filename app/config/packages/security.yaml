@@ -20,27 +20,21 @@ security:
         main:
             lazy: true
             provider: users_in_db  # Utilisez users_in_db si vous utilisez une base de données
-            form_login:
-                login_path: app_login
-                check_path: app_login
-                enable_csrf: true
+            json_login:
+                check_path: api/login
+                username_path: email # Utilise "email" au lieu de "username"
+                password_path: password
+                success_handler: App\Security\LoginSuccessHandler
             logout:
-                path: app_logout
-                # target: app_any_route
+                path: api/logout
+                target: api/login
 
-            # Vous pouvez activer d'autres méthodes d'authentification si nécessaire
-            # guard:
-            #   authenticators:
-            #     - App\Security\CustomAuthenticator
-
-    # Vous pouvez également spécifier les règles de sécurité pour accéder à certaines parties du site en fonction des rôles
     access_control:
         # Règles d'accès pour les différents rôles
         - { path: ^/Administrateur, roles: ROLE_ADMIN }
         - { path: ^/Superviseur, roles: ROLE_SUPERVISOR }
-        - { path: ^/Étudiant, roles: ROLE_STUDENT }
+        - { path: ^/Etudiant, roles: ROLE_STUDENT }
 
-    # Configuration de sécurité pour les tests
 when@test:
     security:
         password_hashers:

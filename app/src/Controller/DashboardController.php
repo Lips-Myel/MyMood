@@ -2,40 +2,54 @@
 
 namespace App\Controller;
 
+use App\Service\JWTManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class DashboardController extends AbstractController
 {
-    #[Route('/student/dashboard', name: 'student_dashboard')]
-    #[IsGranted('ROLE_STUDENT')]
-    public function studentDashboard()
+    private JWTManager $jwtManager;
+
+    public function __construct(JWTManager $jwtManager)
     {
-        // Logique pour le tableau de bord de l'étudiant
-        return new JsonResponse([
-            'message' => 'Tableau de bord de l\'étudiant',
-        ]);
+        $this->jwtManager = $jwtManager;
     }
 
-    #[Route('/supervisor/dashboard', name: 'supervisor_dashboard')]
-    #[IsGranted('ROLE_SUPERVISOR')]
-    public function supervisorDashboard()
+    #[Route('/dashboard', name: 'app_dashboard', methods: ['GET'])]
+    public function index(RequestStack $requestStack): Response
     {
-        // Logique pour le tableau de bord du superviseur
-        return new JsonResponse([
-            'message' => 'Tableau de bord du superviseur',
-        ]);
-    }
+        // Récupérer le token depuis les cookies
+        $token = $requestStack->getCurrentRequest()->cookies->get('token');
 
-    #[Route('/admin/dashboard', name: 'admin_dashboard')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function adminDashboard()
-    {
-        // Logique pour le tableau de bord de l'administrateur
-        return new JsonResponse([
-            'message' => 'Tableau de bord de l\'administrateur',
-        ]);
+        // Si aucun token n'est trouvé, rediriger vers la page de login
+        if (!$token) {
+            return $this->redirectToRoute('index');
+        }
+
+        /* 
+        // Vérifier le token et obtenir le rôle
+        $userRole = $this->jwtManager->verifyToken($token);
+
+        // Affichage du rôle pour déboguer
+        dump('Rôle de l\'utilisateur:', $userRole);
+
+        // Si le token est invalide ou expiré, rediriger vers la page de login
+        if (!$userRole) {
+            dump('Token invalide ou expiré, redirection vers la page de login');
+            return $this->redirectToRoute('index');
+        }
+        */
+
+        // Renvoi du message de bienvenue et du rôle
+        return new Response(
+            json_encode([
+                'message' => 'Bienvenue sur le dashboard',
+                'role' => 'Rôle de l\'utilisateur',
+            ]),
+            Response::HTTP_OK,
+            ['Content-Type' => 'application/json']
+        );
     }
 }
