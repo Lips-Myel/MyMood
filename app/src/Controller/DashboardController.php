@@ -9,12 +9,23 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class DashboardController extends AbstractController
 {
-    #[Route('/student/dashboard', name: 'student_dashboard')]
+    #[Route('/student/dashboard', name: 'student_dashboard', methods:['GET'])]
     #[IsGranted('ROLE_STUDENT')]
-    public function studentDashboard()
+    public function studentDashboardGet()
     {
         // Logique pour le tableau de bord de l'étudiant
+        return new JsonResponse(data: [
+            'message' => 'Tableau de bord de l\'étudiant',
+        ]);
+    }
+    #[Route('/student/dashboard', name: 'student_dashboard', methods:['POST'])]
+    #[IsGranted('ROLE_STUDENT')]
+    public function studentDashboardPost()
+    {
+        
+        // Logique pour le tableau de bord de l'étudiant
         return new JsonResponse([
+            // score
             'message' => 'Tableau de bord de l\'étudiant',
         ]);
     }
