@@ -1,0 +1,40 @@
+/* font import */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* root */
+:root {
+    --font-headings: "Josefin Sans", serif;
+    --font-paragraphes: "Montserrat", serif;
+
+    --color-imts-blue: #1E1C59;
+    --color-imts-red: #D91E41;
+    --color-imts-background: #EFF2F7;
+    --color-white-background: #FFF;
+
+    --color-mood-green: #9EE258;
+    --color-mood-yellow: #FFD25E;
+
+    --box-shadow: rgba(30, 28, 89, 0.1) 0px 1px 2px 0px;
+    --gradient-mood: linear-gradient(90deg, rgba(217, 30, 65, 1) 0%, rgba(255, 210, 94, 1) 50%, rgba(158, 226, 88, 1) 100%);
+
+}
+
+
+/* MyMood de l'en-tête */
+.MyMood {
+    color: var(--color-imts-background);
+    text-align: center;
+    font-family: var(--font-headings);
+    font-size: 24px;
+    padding-top: 30px;
+}
+
+.bouton-profil {
+    text-align: end;
+    font-family: var(--font-headings);
+}
+
+.paragraphe {
+    font-family: var(--font-paragraphes);
+    font-style: italic;
+}
