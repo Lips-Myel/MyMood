@@ -7,7 +7,7 @@
     --font-paragraphes: "Montserrat", serif;
 
     --color-imts-blue: #1E1C59;
-    --color-imts-red: #D91E41;
+    --color-imts-red: #D81D40;
     --color-imts-background: #EFF2F7;
     --color-white-background: #FFF;
 
@@ -27,14 +27,24 @@
     font-family: var(--font-headings);
     font-size: 24px;
     padding-top: 30px;
+    font-weight: bold;
 }
 
 .bouton-profil {
-    text-align: end;
+    padding-right: 20px;
     font-family: var(--font-headings);
+    background-color: var(--color-imts-red);
+    color: var(--color-imts-background);
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .paragraphe {
     font-family: var(--font-paragraphes);
     font-style: italic;
+    background-color: var(--color-white-background);
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 12px;
 }
