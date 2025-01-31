@@ -39,7 +39,6 @@ class DashboardController extends AbstractController
             'message' => 'Tableau de bord du superviseur',
         ]);
     }
-
     #[Route('/admin/dashboard', name: 'admin_dashboard')]
     #[IsGranted('ROLE_ADMIN')]
     public function adminDashboard()
