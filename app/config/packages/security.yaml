@@ -33,7 +33,7 @@ security:
         # Règles d'accès pour les différents rôles
         - { path: ^/Administrateur, roles: ROLE_ADMIN }
         - { path: ^/Superviseur, roles: ROLE_SUPERVISOR }
-        - { path: ^/Etudiant, roles: ROLE_STUDENT }
+        - { path: ^/Étudiant, roles: ROLE_STUDENT }
 
 when@test:
     security:

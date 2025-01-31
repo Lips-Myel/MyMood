@@ -17,13 +17,14 @@ class CallAlerts
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?bool $call_statut = null;
+    private ?bool $callStatut = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $call_date = null;
+    private ?\DateTimeInterface $callDate = null;
 
-    #[ORM\OneToOne(inversedBy: 'callAlerts', cascade: ['persist', 'remove'])]
-    private ?User $alert_between = null;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'callAlerts')]
+    #[ORM\JoinColumn(nullable: false)] // L'utilisateur est obligatoire pour un CallAlert
+    private ?User $alertBetween = null;
 
     public function getId(): ?int
     {
@@ -32,36 +33,36 @@ class CallAlerts
 
     public function isCallStatut(): ?bool
     {
-        return $this->call_statut;
+        return $this->callStatut;
     }
 
-    public function setCallStatut(bool $call_statut): static
+    public function setCallStatut(bool $callStatut): static
     {
-        $this->call_statut = $call_statut;
+        $this->callStatut = $callStatut;
 
         return $this;
     }
 
     public function getCallDate(): ?\DateTimeInterface
     {
-        return $this->call_date;
+        return $this->callDate;
     }
 
-    public function setCallDate(\DateTimeInterface $call_date): static
+    public function setCallDate(\DateTimeInterface $callDate): static
     {
-        $this->call_date = $call_date;
+        $this->callDate = $callDate;
 
         return $this;
     }
 
     public function getAlertBetween(): ?User
     {
-        return $this->alert_between;
+        return $this->alertBetween;
     }
 
-    public function setAlertBetween(?User $alert_between): static
+    public function setAlertBetween(?User $alertBetween): static
     {
-        $this->alert_between = $alert_between;
+        $this->alertBetween = $alertBetween;
 
         return $this;
     }

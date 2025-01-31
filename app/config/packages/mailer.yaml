@@ -1,0 +1,8 @@
+framework:
+  mailer:
+    # dsn: '%env(MAILER_DSN)%'
+    transports:
+      gmail: '%env(MAILER_DSN)%'
+    headers:
+      From: 'ludovic.picaud@institutsolacroup.com'
+      Reply-To: 'ludovic.picaud@institutsolacroup.com'

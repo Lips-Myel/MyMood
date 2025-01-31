@@ -23,12 +23,12 @@ class Roles
     /**
      * @var Collection<int, User>
      */
-    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'has_role')]
-    private Collection $role_owner;
+    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'hasRole')]
+    private Collection $roleOwners;
 
     public function __construct()
     {
-        $this->role_owner = new ArrayCollection();
+        $this->roleOwners = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,15 +51,15 @@ class Roles
     /**
      * @return Collection<int, User>
      */
-    public function getRoleOwner(): Collection
+    public function getRoleOwners(): Collection
     {
-        return $this->role_owner;
+        return $this->roleOwners;
     }
 
     public function addRoleOwner(User $roleOwner): static
     {
-        if (!$this->role_owner->contains($roleOwner)) {
-            $this->role_owner->add($roleOwner);
+        if (!$this->roleOwners->contains($roleOwner)) {
+            $this->roleOwners->add($roleOwner);
             $roleOwner->setHasRole($this);
         }
 
@@ -68,7 +68,7 @@ class Roles
 
     public function removeRoleOwner(User $roleOwner): static
     {
-        if ($this->role_owner->removeElement($roleOwner)) {
+        if ($this->roleOwners->removeElement($roleOwner)) {
             // set the owning side to null (unless already changed)
             if ($roleOwner->getHasRole() === $this) {
                 $roleOwner->setHasRole(null);
