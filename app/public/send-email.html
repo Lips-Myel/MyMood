@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envoyer un e-mail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Test d'envoi d'e-mail</h1>
+    <p>Cliquez sur le bouton ci-dessous pour envoyer un e-mail.</p>
+    
+    <button onclick="sendEmail()">Envoyer l'e-mail</button>
+    
+    <p id="result"></p>
+
+    <script>
+        function sendEmail() {
+            fetch('/api/send-email', {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').textContent = data.message;
+            })
+            .catch(error => {
+                document.getElementById('result').textContent = "Erreur lors de l'envoi de l'e-mail.";
+                console.error('Erreur:', error);
+            });
+        }
+    </script>
+
+</body>
+</html>

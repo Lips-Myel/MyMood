@@ -19,3 +19,15 @@ services:
     App\Service\JWTManager:
         arguments:
             $secretKey: '%jwt_secret_key%'
+
+    App\Service\PasswordFactory:
+        arguments:
+            $passwordHasher: '@security.password_hasher'
+            
+    
+    App\Controller\UserCreateController:
+        autowire: true
+        autoconfigure: true
+        public: true  # Permet d'être utilisé par API Platform
+
+

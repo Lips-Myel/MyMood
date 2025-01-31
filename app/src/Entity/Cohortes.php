@@ -22,10 +22,10 @@ class Cohortes
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $start_date = null;
+    private ?\DateTimeInterface $startDate = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $end_date = null;
+    private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column]
     private ?bool $temporary = null;
@@ -34,11 +34,12 @@ class Cohortes
      * @var Collection<int, User>
      */
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'cohortes')]
-    private Collection $Cohortes_Member;
+    private Collection $cohortMember; // Correction de la casse ici
+    private ?User $supervisor = null;
 
     public function __construct()
     {
-        $this->Cohortes_Member = new ArrayCollection();
+        $this->cohortMember = new ArrayCollection(); // Correction de la casse ici
     }
 
     public function getId(): ?int
@@ -60,24 +61,24 @@ class Cohortes
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->startDate;
     }
 
-    public function setStartDate(?\DateTimeInterface $start_date): static
+    public function setStartDate(?\DateTimeInterface $startDate): static
     {
-        $this->start_date = $start_date;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->end_date;
+        return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $end_date): static
+    public function setEndDate(?\DateTimeInterface $endDate): static
     {
-        $this->end_date = $end_date;
+        $this->endDate = $endDate;
 
         return $this;
     }
@@ -97,24 +98,35 @@ class Cohortes
     /**
      * @return Collection<int, User>
      */
-    public function getCohortesMember(): Collection
+    public function getCohortMembers(): Collection
     {
-        return $this->Cohortes_Member;
+        return $this->cohortMember; // Correction de la casse ici
     }
 
-    public function addCohortesMember(User $cohortesMember): static
+    public function addCohortMember(User $cohortMember): static
     {
-        if (!$this->Cohortes_Member->contains($cohortesMember)) {
-            $this->Cohortes_Member->add($cohortesMember);
+        if (!$this->cohortMember->contains($cohortMember)) { // Correction de la casse ici
+            $this->cohortMember->add($cohortMember); // Correction de la casse ici
         }
 
         return $this;
     }
 
-    public function removeCohortesMember(User $cohortesMember): static
+    public function removeCohortMember(User $cohortMember): static
     {
-        $this->Cohortes_Member->removeElement($cohortesMember);
+        $this->cohortMember->removeElement($cohortMember); // Correction de la casse ici
 
+        return $this;
+    }
+
+    public function getSupervisor(): ?User
+    {
+        return $this->supervisor;
+    }
+
+    public function setSupervisor(User $supervisor): static
+    {
+        $this->supervisor = $supervisor;
         return $this;
     }
 }

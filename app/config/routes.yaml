@@ -22,3 +22,9 @@ app_dashboard:
     path: /dashboard
     controller: App\Controller\DashboardController::index
     methods: [GET]
+
+app_mailer:
+    path: /mailer
+    controller: App\Controller\MailerController::sendEmail
+    methods: [GET]
+

@@ -45,7 +45,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
                 'email' => $user->getEmail(),
                 'first_name' => $user->getFirstName(),
                 'last_name' => $user->getLastName(),
-                'roles' => $user->getRoles(), // Envoie les rôles de l'utilisateur
+                'roles' => $user->getHasRole(), // Envoie les rôles de l'utilisateur
             ],
         ]);
 

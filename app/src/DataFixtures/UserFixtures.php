@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\CallAlerts;
 use App\Entity\User;
 use App\Entity\Mood;
 use App\Entity\Roles;
@@ -71,7 +72,7 @@ class UserFixtures extends Fixture
             $user->setHasRole($roles[array_rand($roles)]); // Assigner un rôle aléatoire
 
             // Assigner une cohorte aléatoire à l'utilisateur
-            $user->addCohorte($cohorts[array_rand($cohorts)]); // Assigner une cohorte aléatoire
+            $user->addCohort($cohorts[array_rand($cohorts)]); // Assigner une cohorte aléatoire
 
             // Hacher le mot de passe
             $user->setPassword($this->passwordHasher->hashPassword(
@@ -90,6 +91,16 @@ class UserFixtures extends Fixture
                 $historicalMood->setScore($faker->numberBetween(1, 100));
                 $manager->persist($historicalMood);
             }
+        }
+
+         // Créer des alertes d'appel pour certains utilisateurs
+         for ($i = 0; $i < 5; $i++) { // 5 appels aléatoires
+            $callAlert = new CallAlerts();
+            $callAlert->setCallStatut($faker->boolean());
+            $callAlert->setCallDate($faker->dateTimeThisMonth());
+            $callAlert->setAlertBetween($users[array_rand($users)]); // Assigner un utilisateur aléatoire
+
+            $manager->persist($callAlert);
         }
 
         $manager->flush();

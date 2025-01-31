@@ -22,17 +22,17 @@ class Mood
     private ?int $score = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $date_mood = null;
+    private ?\DateTimeInterface $dateMood = null;
 
     /**
      * @var Collection<int, User>
      */
-    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'has_mood')]
-    private Collection $my_mood;
+    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'hasMood')]
+    private Collection $myMoods;
 
     public function __construct()
     {
-        $this->my_mood = new ArrayCollection();
+        $this->myMoods = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,12 +54,12 @@ class Mood
 
     public function getDateMood(): ?\DateTimeInterface
     {
-        return $this->date_mood;
+        return $this->dateMood;
     }
 
-    public function setDateMood(?\DateTimeInterface $date_mood): static
+    public function setDateMood(?\DateTimeInterface $dateMood): static
     {
-        $this->date_mood = $date_mood;
+        $this->dateMood = $dateMood;
 
         return $this;
     }
@@ -67,15 +67,15 @@ class Mood
     /**
      * @return Collection<int, User>
      */
-    public function getMyMood(): Collection
+    public function getMyMoods(): Collection
     {
-        return $this->my_mood;
+        return $this->myMoods;
     }
 
     public function addMyMood(User $myMood): static
     {
-        if (!$this->my_mood->contains($myMood)) {
-            $this->my_mood->add($myMood);
+        if (!$this->myMoods->contains($myMood)) {
+            $this->myMoods->add($myMood);
             $myMood->setHasMood($this);
         }
 
@@ -84,7 +84,7 @@ class Mood
 
     public function removeMyMood(User $myMood): static
     {
-        if ($this->my_mood->removeElement($myMood)) {
+        if ($this->myMoods->removeElement($myMood)) {
             // set the owning side to null (unless already changed)
             if ($myMood->getHasMood() === $this) {
                 $myMood->setHasMood(null);
