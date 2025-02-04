@@ -9,6 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -22,7 +24,7 @@ use App\Controller\UserCreateController;
 #[ApiResource(
     operations: [
         new Post(
-            uriTemplate: '/create-users',
+            uriTemplate: '/admin/create-users',
             controller: UserCreateController::class,
             name: 'app_create_users',
             extraProperties: [
@@ -34,7 +36,7 @@ use App\Controller\UserCreateController;
         )
     ]
 )]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -257,4 +259,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    
+
+
+    // Ajoute cette méthode pour enrichir le token avec tes données personnalisées
+        public function getJWTCustomClaims(): array
+        {
+            return [
+                'id' => $this->getId(),
+                'email' => $this->getEmail(),
+                'first_name' => $this->getFirstName(),
+                'last_name' => $this->getLastName(),
+                'roles' => $this->getRoles(),
+            ];
+        }
+
+        // Implémentation de la méthode obligatoire (peut rester vide si inutile)
+        public static function createFromPayload($username, array $payload)
+        {
+            // Ici, tu peux récupérer les données du payload pour recréer un utilisateur si nécessaire
+            return new self();
+        }
 }
+
+

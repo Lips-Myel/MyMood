@@ -18,7 +18,8 @@ services:
 
     App\Service\JWTManager:
         arguments:
-            $secretKey: '%jwt_secret_key%'
+            $jwtManager: '@lexik_jwt_authentication.jwt_manager'
+            $jwtEncoder: '@lexik_jwt_authentication.encoder'
 
     App\Service\PasswordFactory:
         arguments:
@@ -30,4 +31,20 @@ services:
         autoconfigure: true
         public: true  # Permet d'être utilisé par API Platform
 
-
+    App\EventListener\JWTMiddleware:
+        arguments:
+            $requestStack: '@request_stack'
+            $jwtManager: '@App\Service\JWTManager'
+            $router: '@router'
+            $logger: '@logger'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
+    
+    # App\EventListener\JWTRequestEventListener:
+    #     arguments:
+    #         $requestStack: '@request_stack'
+    #         $jwtManager: '@App\Service\JWTManager'
+    #         $router: '@router'
+    #         $logger: '@logger'
+    #     tags:
+    #         - { name: 'kernel.event_listener', event: 'kernel.request' }

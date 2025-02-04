@@ -24,16 +24,19 @@ security:
                 check_path: api/login
                 username_path: email # Utilise "email" au lieu de "username"
                 password_path: password
-                success_handler: App\Security\LoginSuccessHandler
+                
             logout:
                 path: api/logout
                 target: api/login
 
+            stateless: true
+            
     access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         # Règles d'accès pour les différents rôles
-        - { path: ^/Administrateur, roles: ROLE_ADMIN }
-        - { path: ^/Superviseur, roles: ROLE_SUPERVISOR }
-        - { path: ^/Étudiant, roles: ROLE_STUDENT }
+        - { path: ^/admin, roles: Administrateur }
+        - { path: ^/supervisor, roles: Superviseur }
+        - { path: ^/student, roles: Étudiant }
 
 when@test:
     security:

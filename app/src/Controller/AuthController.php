@@ -46,23 +46,35 @@ class AuthController extends AbstractController
             return new JsonResponse(['error' => 'Email ou mot de passe invalide'], 401);
         }
 
-        // Création du JWT
-        $jwt = $this->jwtManager->create($user);
+       // Création du token JWT
+    $jwt = $this->jwtManager->create($user);
 
-        // Définir le cookie `token`
-        $response = new JsonResponse([
-            'success' => true,
-            'message' => 'Connexion réussie',
-            'token' => $jwt,
-            'user' => [
-                'id' => $user->getId(),
-                'email' => $user->getEmail(),
-                'first_name' => $user->getFirstName(),
-                'last_name' => $user->getLastName(),
-                'roles' => $user->getRoles(), // Envoie les rôles de l'utilisateur
-            ],
-        ]);
-        $response->headers->setCookie(new Cookie('token', $jwt, time() + 3600, '/', null, false, true));
+    // Définition du cookie sécurisé avec le token JWT
+    $response = new JsonResponse([
+        'success' => true,
+        'message' => 'Connexion réussie',
+        'user' => [
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+            'first_name' => $user->getFirstName(),
+            'last_name' => $user->getLastName(),
+            'roles' => $user->getRoles(),
+        ],
+    ]);
+        // Ajout du cookie JWT avec SameSite=None et Secure
+        $response->headers->setCookie(
+            new Cookie(
+                'token',
+                $jwt,
+                time() + 3600, // Expiration dans 1 heure
+                '/',
+                null,
+                true,  // Secure (nécessite HTTPS)
+                true,  // HttpOnly (non accessible via JavaScript)
+                false,
+                'None' // SameSite=None pour permettre l'accès en cross-site
+            )
+        );
 
         return $response;
     }
@@ -70,7 +82,12 @@ class AuthController extends AbstractController
     #[Route('/logout', name: 'api_logout', methods: ['POST'])]
     public function logout(): JsonResponse
     {
-        // Inform client to clear token (actual invalidation requires additional mechanisms)
-        return new JsonResponse(['message' => 'Déconnexion réussie']);
+        // Définition d'un cookie expiré pour supprimer le token du navigateur
+        $response = new JsonResponse(['message' => 'Déconnexion réussie']);
+        $response->headers->setCookie(
+            new Cookie('token', '', time() - 3600, '/', null, true, true, false, 'None')
+        );
+
+        return $response;
     }
 }

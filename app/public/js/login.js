@@ -34,11 +34,11 @@ document.querySelector('#login-form').addEventListener('submit', async (event) =
         //Redirection selon le rôle utilisateur
         const userRoles = data.user.roles;
         if (userRoles.includes('Administrateur')) {
-            window.location.href = '/admin_dashboard.html';
+            window.location.href = '/admin/admin_dashboard.html';
         } else if (userRoles.includes('Superviseur')) {
-            window.location.href = '/supervisor_dashboard.html';
+            window.location.href = '/supervisor/supervisor_dashboard.html';
         } else if (userRoles.includes('Étudiant')) {
-            window.location.href = '/student_dashboard.html';
+            window.location.href = '/student/student_dashboard.html';
         } else {
             alert('Rôle utilisateur non reconnu.');
             window.location.href = '/';

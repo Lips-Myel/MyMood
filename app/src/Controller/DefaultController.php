@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
     // Route pour la page d'accueil
-    #[Route('/', name: 'home', methods: ['GET'])]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function home(): Response
     {
         $filePath = $this->getParameter('kernel.project_dir') . '/public/index.html';
