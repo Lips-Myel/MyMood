@@ -10,9 +10,24 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new \ApiPlatform\Metadata\GetCollection(),
+        new \ApiPlatform\Metadata\Get(
+            uriTemplate: '/users',
+            controller: 'App\Controller\DashboardController::student_dashboard'
+        ),
+        new \ApiPlatform\Metadata\Put(),
+        new \ApiPlatform\Metadata\Patch(),
+        new \ApiPlatform\Metadata\Delete(),
+        new \ApiPlatform\Metadata\Post(),
+    ],
+    normalizationContext: ['groups' => ['utilisateur:read']], // pour la lecture des utilisateurs
+)]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -21,6 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['User:read'])] 
     private ?string $first_name = null;
 
     #[ORM\Column(length: 255)]
