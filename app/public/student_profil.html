@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Accueil</title>
+        <title>Mon profil</title>
         <link rel="stylesheet" href="./css/root.css">
         <link rel="stylesheet" href="./css/stagiaire.css">
     </head>
@@ -22,11 +22,17 @@
             <input type="text" id="surnameField" name="surname" value="Prénom"/>
         </form>
         <p>Nouveau mot de passe</p>
+        <form name="passwordForm" method="GET" action="">
+            <input type="text" id="passwordField" name="password"/>
+        </form>
         <p>Confirmer mot de passe</p>
-        <a href="#"><button class="bouton1" type="button">Retour</button></a>
-        <a href="#"><button class="bouton1" type="button">Valider</button></a>
+        <form name="confirmForm" method="GET" action="">
+            <input type="text" id="confirmField" name="confirm"/>
+        </form>
+        <a href="./student_dashboard.html"><button class="bouton1" type="button">Retour</button></a>
+        <a href="./student_modified_profile.html"><button class="bouton1" type="button">Valider</button></a>
     </div>
-    <a href="#"><button class="bouton1" type="button">Deconnexion</button></a>
+    <a href="./index.html"><button class="bouton1" type="button">Deconnexion</button></a>
 </body>
 
 <script>
