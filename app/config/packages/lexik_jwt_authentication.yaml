@@ -1,9 +1,10 @@
 lexik_jwt_authentication:
     secret_key: '%kernel.project_dir%/config/jwt/private.pem' # Chemin de votre clé privée
     public_key: '%kernel.project_dir%/config/jwt/public.pem'  # Chemin de votre clé publique
-    pass_phrase:                      # Passphrase pour la clé privée
+    pass_phrase: isaac # Passphrase pour la clé privée
     token_ttl: 3600                                          # Durée de validité du token (en secondes)
     token_extractors:
         cookie:
             enabled: true
             name: token  # Nom du cookie contenant le token JWT
+    user_id_claim: email

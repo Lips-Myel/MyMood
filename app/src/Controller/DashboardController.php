@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Service\JWTManager;
@@ -22,34 +21,38 @@ class DashboardController extends AbstractController
     {
         // Récupérer le token depuis les cookies
         $token = $requestStack->getCurrentRequest()->cookies->get('token');
-
-        // Si aucun token n'est trouvé, rediriger vers la page de login
+    
+        //Si aucun token n'est trouvé, rediriger vers la page de login
         if (!$token) {
             return $this->redirectToRoute('index');
         }
-
-        /* 
-        // Vérifier le token et obtenir le rôle
-        $userRole = $this->jwtManager->verifyToken($token);
-
-        // Affichage du rôle pour déboguer
-        dump('Rôle de l\'utilisateur:', $userRole);
-
+    
+        // Débogage du token avant décodage
+        error_log('Token reçu: ' . $token);
+    
+        // Décoder le token et obtenir les informations de l'utilisateur
+        $userData = $this->jwtManager->parseJWT($token);
+    
         // Si le token est invalide ou expiré, rediriger vers la page de login
-        if (!$userRole) {
-            dump('Token invalide ou expiré, redirection vers la page de login');
+        if (!$userData) {
             return $this->redirectToRoute('index');
         }
-        */
-
-        // Renvoi du message de bienvenue et du rôle
+    
+        // Affichage des informations décodées
+        $roles = $userData['roles'] ?? ['Rôle non défini'];
+        $username = $userData['email'] ?? 'Nom d\'utilisateur non défini';
+    
+        // Renvoi du message de bienvenue avec les informations décodées
         return new Response(
             json_encode([
                 'message' => 'Bienvenue sur le dashboard',
-                'role' => 'Rôle de l\'utilisateur',
+                'username' => $username,
+                'roles' => $roles,
+                $userData,
+                $token
             ]),
             Response::HTTP_OK,
             ['Content-Type' => 'application/json']
         );
     }
-}
+}    

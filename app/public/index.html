@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 
 <head>
@@ -6,17 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>MyMoodApp - Application de Visualisation d'Humeur</title>
-    <link rel="stylesheet" href="./css/root.css">
-    <link rel="stylesheet" href="./css/index.css">
-    <script src="js/login.js" defer></script>
 
+    <link rel="preload" href="./css/root.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./css/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <noscript>
+        <link rel="stylesheet" href="./css/root.css">
+        <link rel="stylesheet" href="./css/index.css">
+    </noscript>
+
+    <script src="js/login.js" defer></script>
 </head>
 
 <body>
     <header></header>
     <main>
         <div id="div-welcome">
-            <p>bienvenue sur</p>
+            <p>Bienvenue sur</p>
             <h1>MyMoodApp</h1>
         </div>
 
@@ -31,9 +38,8 @@
                 <input type="password" id="login-password" class="text-input" placeholder="Mot de passe" required>
             </div>
 
-            <input type="submit" id="login-submit" value="connexion" class="red-button">
+            <input type="submit" id="login-submit" value="Connexion" class="red-button">
         </form>
-        <div></div>
     </main>
 </body>
 
