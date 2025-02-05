@@ -38,3 +38,8 @@
     font-family: var(--font-paragraphes);
     font-style: italic;
 }
+
+h2{
+    font-family: var(--font-paragraphes);
+    font-weight: bold;
+}

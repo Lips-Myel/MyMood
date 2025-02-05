@@ -5,20 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MyMoodApp - Application de Visualisation d'Humeur</title>
         <link rel="stylesheet" href="./../../css/root.css">
-        <link rel="stylesheet" href="./../../css/index.css">
+        <link rel="stylesheet" href="./../../css/stagiaire.css">
     </head>
 <body>
+    <header><form action="/logout" method="POST">
+        <button type="submit" class="red-button">Déconnexion</button>
+    </form></header>
+
     <h1>MyMood</h1>
     <h2>Admin_Dashboard</h2>
-
-    <!-- Bouton pour créer un utilisateur -->
     <a href="./create-user.html">
         <button class="red-button">Créer un Utilisateur</button>
     </a>
-
-    <!-- Formulaire de déconnexion -->
-    <form action="/logout" method="POST">
-        <button type="submit" class="red-button">Déconnexion</button>
-    </form>
 </body>
 </html>

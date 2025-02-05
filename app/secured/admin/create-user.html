@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Création d'un utilisateur</title>
     <link rel="stylesheet" href="./../../css/root.css">
-    <link rel="stylesheet" href="./../../css/index.css">
+    <link rel="stylesheet" href="./../../css/stagiaire.css">
     <style>
-        body {
-            margin: 50px;
-        }
         h2{
             font-family: var(--font-headings)
+            
         }
         .form-container {
             max-width: 600px;
@@ -52,14 +50,16 @@
     </style>
 </head>
 <body>
-    <section>
-        <form action="/logout" method="POST">
-            <button type="submit" class="red-button">Déconnexion</button>
-        </form>
-        <a href="./admin_dashboard.html">
-            <button class="red-button">Dashboard</button>
-        </a>
-    </section>
+    <header>
+        <span>
+            <form action="/logout" method="POST">
+                <button type="submit" class="red-button">Déconnexion</button>
+            </form>
+            <a href="./admin_dashboard.html">
+                <button class="red-button">Dashboard</button>
+            </a>
+        </span>
+    </header>
     <div class="form-container">
         <h2>Créer un utilisateur</h2>
         <form id="createUserForm">
