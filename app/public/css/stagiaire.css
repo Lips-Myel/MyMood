@@ -30,8 +30,14 @@
     font-weight: bold;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .bouton-profil {
-    padding-right: 20px;
+    padding: 8px 24px;
     font-family: var(--font-headings);
     background-color: var(--color-imts-red);
     color: var(--color-imts-background);
@@ -63,11 +69,46 @@
     font-weight: bold;
 }
 
+.ecran-rouge {
+    justify-content: center;
+    font-size: 14px;
+    font-family: var(--font-heading);
+    background-color: var(--color-imts-red);
+    border-radius: 15px;
+    color: var(--color-imts-background);
+    padding-left: 33px;
+    padding-right: 33px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-weight: bold;
+}
+
 .bouton1 {
     justify-content: center;
     font-family: var(--font-headings);
     background-color: var(--color-imts-red);
     color: var(--color-imts-background);
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 24px;
+}
+
+.bouton2 {
+    justify-content: center;
+    font-family: var(--font-headings);
+    background-color: var(--color-white-background);
+    color: var(--color-imts-blue);
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.bouton3 {
+    justify-content: center;
+    font-family: var(--font-headings);
+    background-color: var(--color-white-background);
+    color: var(--color-imts-red);
     border-radius: 5px;
     font-size: 12px;
     font-weight: bold;
