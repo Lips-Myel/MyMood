@@ -29,7 +29,11 @@ class UserController extends AbstractController
             'email' => $user->getEmail(),
             'firstName' => $user->getFirstName(),
             'lastName' => $user->getLastName(),
-            'role' => $user->getHasRole()->getName()
+            'role' => $user->getHasRole()->getName(),
+            'cohorte' => $user->getCohortNames(),
+            'blackListe'=> $user->isBlackList(),
+            'hasMood'=> $user->getMoodScore(),
+            'lastConnection'=> $user->getLastConnection()
         ], $users);
 
         return new JsonResponse($data);
@@ -50,7 +54,11 @@ class UserController extends AbstractController
             'email' => $user->getEmail(),
             'firstName' => $user->getFirstName(),
             'lastName' => $user->getLastName(),
-            'role' => $user->getHasRole()->getName()
+            'role' => $user->getHasRole()->getName(),
+            'cohorte' => $user->getCohortNames(),
+            'blackListe'=> $user->isBlackList(),
+            'hasMood'=> $user->getMoodScore(),
+            'lastConnection'=> $user->getLastConnection()
         ];
 
         return new JsonResponse($data);
