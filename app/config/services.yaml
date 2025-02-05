@@ -1,42 +1,43 @@
 parameters:
-    jwt_secret_key: '%env(JWT_SECRET_KEY)%'
+    jwt_secret_key: '%env(JWT_SECRET_KEY)%' # Clé secrète JWT définie dans les variables d’environnement
 
 services:
-    # Default configuration for services in *this* file
+    # Configuration par défaut pour les services définis dans ce fichier
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true      # Injection automatique des dépendances dans les services
+        autoconfigure: true # Enregistrement automatique des services comme commandes, abonnés à des événements, etc.
 
-    # Makes classes in src/ available to be used as services
-    # This creates a service per class whose id is the fully-qualified class name
+    # Déclare tous les services situés dans le dossier "src/"
+    # Cela crée un service pour chaque classe dont l'identifiant est son nom de classe complet (FQCN)
     App\:
         resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
+        exclude:  # Exclut certains fichiers et dossiers pour éviter les erreurs
+            - '../src/DependencyInjection/'  # Exclut la configuration interne de Symfony
+            - '../src/Entity/'  # Les entités ne sont pas des services
+            - '../src/Kernel.php'  # Le noyau de Symfony ne doit pas être enregistré comme service
 
+    # Service personnalisé pour la gestion des tokens JWT
     App\Service\JWTManager:
         arguments:
-            $jwtManager: '@lexik_jwt_authentication.jwt_manager'
-            $jwtEncoder: '@lexik_jwt_authentication.encoder'
+            $jwtManager: '@lexik_jwt_authentication.jwt_manager' # Service fourni par LexikJWT pour la gestion des tokens
+            $jwtEncoder: '@lexik_jwt_authentication.encoder' # Service pour l’encodage des JWT
 
+    # Service pour la gestion et le hachage des mots de passe
     App\Service\PasswordFactory:
         arguments:
-            $passwordHasher: '@security.password_hasher'
-            
-    
-    App\Controller\UserCreateController:
-        autowire: true
-        autoconfigure: true
-        public: true  # Permet d'être utilisé par API Platform
+            $passwordHasher: '@security.password_hasher' # Service Symfony pour le hachage sécurisé des mots de passe
 
+    # Déclaration des contrôleurs personnalisés utilisés dans API Platform
+    # Symfony injecte automatiquement leurs dépendances
+    App\Controller\UserCreateController: ~
+    App\Controller\UserUpdateController: ~
+
+    # Middleware (écouteur d’événement) pour gérer les requêtes JWT
     App\EventListener\JWTMiddleware:
         arguments:
-            $requestStack: '@request_stack'
-            $jwtManager: '@App\Service\JWTManager'
-            $router: '@router'
-            $logger: '@logger'
+            $requestStack: '@request_stack'  # Permet d'accéder à la requête HTTP en cours
+            $jwtManager: '@App\Service\JWTManager'  # Service de gestion des JWT
+            $router: '@router'  # Service pour la gestion des routes Symfony
+            $logger: '@logger'  # Service de journalisation des erreurs et événements
         tags:
-            - { name: kernel.event_listener, event: kernel.request }
-    
+            - { name: kernel.event_listener, event: kernel.request } # Déclenche l'écouteur sur chaque requête HTTP

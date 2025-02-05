@@ -3,24 +3,24 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\ApiSubresource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Delete;
 use App\Repository\UserRepository;
+use App\Controller\UserCreateController;
+use App\Controller\UserUpdateController;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Metadata\Post;
-use App\Controller\UserCreateController;
 
-/**
- * Classe représentant un utilisateur.
- */
-#[ORM\Entity(repositoryClass: UserRepository::class)]
+
 #[ApiResource(
     operations: [
         new Post(
@@ -33,9 +33,63 @@ use App\Controller\UserCreateController;
                     'description' => 'Une route POST personnalisée pour créer un utilisateur',
                 ]
             ]
+        ),
+        new GetCollection(
+            uriTemplate: '/users',
+            name: 'app_get_users',
+            extraProperties: [
+                'openapi' => [
+                    'summary' => 'Récupérer tous les utilisateurs',
+                    'description' => 'Retourne la liste complète des utilisateurs',
+                ]
+            ]
+        ),
+        new Get(
+            uriTemplate: '/users/{id}',
+            name: 'app_get_user_by_id',
+            extraProperties: [
+                'openapi' => [
+                    'summary' => 'Récupérer un utilisateur par ID',
+                    'description' => 'Retourne un utilisateur spécifique basé sur son ID',
+                ]
+            ]
+        ),
+        new Patch(
+            uriTemplate: '/users/{id}',
+            controller: UserUpdateController::class . '::updateUser',
+            name: 'app_update_user',
+            extraProperties: [
+                'openapi' => [
+                    'summary' => 'Mettre à jour un utilisateur',
+                    'description' => 'Modifie les informations d’un utilisateur, y compris son mot de passe',
+                ]
+            ]
+        ),
+        new Delete(
+            uriTemplate: '/users/{id}',
+            name: 'app_delete_user',
+            extraProperties: [
+                'openapi' => [
+                    'summary' => 'Supprimer un utilisateur',
+                    'description' => 'Supprime un utilisateur de la base de données',
+                ]
+            ]
+        ),
+        new Post(
+            uriTemplate: '/users/{id}/reset-password',
+            controller: UserUpdateController::class . '::resetPassword',
+            name: 'app_reset_password',
+            extraProperties: [
+                'openapi' => [
+                    'summary' => 'Réinitialiser le mot de passe',
+                    'description' => 'Génère un nouveau mot de passe pour un utilisateur et le met à jour',
+                ]
+            ]
         )
     ]
 )]
+
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUserInterface
 {
     #[ORM\Id]
@@ -70,17 +124,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
 
     #[ORM\ManyToOne(targetEntity: Mood::class, inversedBy: 'myMoods')]
     #[ORM\JoinColumn(nullable: true)] // Relation nullable
-    #[ApiSubresource]
     #[Groups(['mood:read'])]
     private ?Mood $hasMood = null;
 
     #[ORM\OneToMany(mappedBy: 'alertBetween', targetEntity: CallAlerts::class, cascade: ['persist', 'remove'])]
-    #[ApiSubresource]
     private Collection $callAlerts;
 
     #[ORM\ManyToOne(targetEntity: Roles::class, inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
-    #[ApiSubresource]
     #[Groups(['role:read'])]
     private ?Roles $hasRole = null;
 
@@ -88,7 +139,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
      * @var Collection<int, Cohortes>
      */
     #[ORM\ManyToMany(targetEntity: Cohortes::class, mappedBy: 'cohortMember')]
-    #[ApiSubresource]
     #[Groups(['cohortes:read', 'cohortes:write'])]
     private Collection $cohortes;
     
