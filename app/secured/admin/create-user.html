@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Création d'un utilisateur</title>
+    <link rel="stylesheet" href="./../../css/root.css">
+    <link rel="stylesheet" href="./../../css/index.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 50px;
+        }
+        h2{
+            font-family: var(--font-headings)
         }
         .form-container {
             max-width: 600px;
@@ -22,7 +26,7 @@
         }
         label {
             display: block;
-            font-weight: bold;
+            font-family: var(--font-paragraphes);
         }
         input, select {
             width: 100%;
@@ -30,18 +34,7 @@
             margin-top: 5px;
             font-size: 16px;
         }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
+        
         .message {
             margin-top: 20px;
             padding: 10px;
@@ -59,7 +52,14 @@
     </style>
 </head>
 <body>
-
+    <section>
+        <form action="/logout" method="POST">
+            <button type="submit" class="red-button">Déconnexion</button>
+        </form>
+        <a href="./admin_dashboard.html">
+            <button class="red-button">Dashboard</button>
+        </a>
+    </section>
     <div class="form-container">
         <h2>Créer un utilisateur</h2>
         <form id="createUserForm">
@@ -78,17 +78,17 @@
             <div class="form-group">
                 <label for="hasRole">Rôle</label>
                 <select id="role" name="hasRole" required>
-                    <option value=1>Étudiant</option>
-                    <option value=2>Superviseur</option>
-                    <option value=3>Administrateur</option>
+                    <option value=4>Étudiant</option>
+                    <option value=5>Superviseur</option>
+                    <option value=6>Administrateur</option>
                 </select>
             </div>
-            <button type="submit">Créer l'utilisateur</button>
+            <button class="red-button" type="submit">Créer l'utilisateur</button>
         </form>
 
         <div class="message" id="responseMessage"></div>
     </div>
-
+    
     <script>
         document.getElementById('createUserForm').addEventListener('submit', function(event) {
             event.preventDefault();

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\Routing\Annotation\Route;
@@ -80,14 +81,13 @@ class AuthController extends AbstractController
     }
 
     #[Route('/logout', name: 'api_logout', methods: ['POST'])]
-    public function logout(): JsonResponse
-    {
-        // Définition d'un cookie expiré pour supprimer le token du navigateur
-        $response = new JsonResponse(['message' => 'Déconnexion réussie']);
-        $response->headers->setCookie(
-            new Cookie('token', '', time() - 3600, '/', null, true, true, false, 'None')
-        );
+    public function logout(): RedirectResponse
+{
+    $response = new RedirectResponse($this->generateUrl('index'));
+    $response->headers->setCookie(
+        new Cookie('token', '', time() - 3600, '/', null, true, true, false, 'None')
+    );
 
-        return $response;
-    }
+    return $response;
+}
 }
