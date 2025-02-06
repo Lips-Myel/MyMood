@@ -38,6 +38,14 @@ main {
     flex-direction: column;
     gap: 4px;
     width: 100%;
+    
+}
+input{
+    border-radius: 8px;
+}
+label{
+    color: white;
+    margin-bottom: 3px;
 }
 
 #login-submit {

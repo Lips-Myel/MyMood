@@ -7,6 +7,10 @@ main {
     margin-left: 25vw;
 }
 
+h1{
+    margin-left: 156px; 
+}
+
 #group-banner {
     display: flex;
     align-items: center;

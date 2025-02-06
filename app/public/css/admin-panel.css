@@ -1,7 +1,7 @@
 .group {
-    background-color: var(--color-imts-background);
+    background-color: var(--color-white-background);
     padding: 8px;
-    width: 100%;
+    width: 19vw;
 }
 
 body {
@@ -11,4 +11,8 @@ body {
 
 main {
     margin-left: 25vw;
+}
+
+h1{
+    margin-left: 156px; 
 }

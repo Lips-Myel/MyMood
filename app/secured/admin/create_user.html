@@ -5,21 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Création d'un utilisateur</title>
     <link rel="stylesheet" href="./../../css/root.css">
-    <link rel="stylesheet" href="./../../css/stagiaire.css">
+    <link rel="stylesheet" href="./../../css/index.css">
     <style>
-<<<<<<< Updated upstream:app/secured/admin/create_user.html
-        body {
-            margin: 50px;
-=======
-        body{
-            font-family: var(--font-paragraphes);
-            
->>>>>>> Stashed changes:app/secured/admin/create-user.html
+        header{
+            justify-content: flex-end;
         }
-        h2{
-            font-family: var(--font-headings)
-            
+        h1{
+            width: 55%;
+
         }
+
+
         .form-container {
             margin: 100px auto;
             display: flex;
@@ -37,6 +33,12 @@
             color: white;
             font-family: var(--font-paragraphes);
         }
+
+        h2{
+            color: white;
+            text-align: center;
+        }
+
         .login-input {
             text-align: left;
             display: flex;
@@ -44,6 +46,12 @@
             gap: 4px;
             width: 100%;
             margin-bottom: 10px;
+        }
+        .text-input{
+            border-radius: 8px;
+        }
+        label{
+            color: white;
         }
 
         select{
@@ -74,16 +82,16 @@
     </style>
 </head>
 <body>
-    <header>
-        <span>
-            <form action="/logout" method="POST">
-                <button type="submit" class="red-button">Déconnexion</button>
-            </form>
+        <header>
+            <h1>MyMoodApp</h1>
             <a href="./admin_dashboard.html">
-                <button class="red-button">Dashboard</button>
+                <button id="logout" class="red-button">Dashboard</button>
             </a>
-        </span>
-    </header>
+            <form action="/logout" method="POST">
+                <button id="logout" type="submit" class="red-button">Déconnexion</button>
+            </form>
+        </header>
+    
     <div class="form-container">
         <h2>Créer un utilisateur</h2>
         <form id="createUserForm">
