@@ -72,7 +72,7 @@ class UserCreateController extends AbstractController
         $user->setBlackList(false); // Par défaut, l'utilisateur n'est pas dans la liste noire
 
         // Récupérer ou définir un rôle par défaut (1 = Étudiant)
-        $roleId = $data['hasRole'] ?? 1; // Si 'hasRole' n'est pas présent, assigner le rôle par défaut 1 (Étudiant)
+        $roleId = $data['hasRole'] ?? 4; // Si 'hasRole' n'est pas présent, assigner le rôle par défaut 1 (Étudiant)
 
         // Validation du rôle dans la base de données
         $role = $this->entityManager->getRepository(Roles::class)->find($roleId);

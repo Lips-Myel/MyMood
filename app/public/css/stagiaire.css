@@ -48,3 +48,9 @@ h2{
 }
 
 >>>>>>> Stashed changes
+
+
+h2{
+    font-family: var(--font-paragraphes);
+    font-weight: bold;
+}

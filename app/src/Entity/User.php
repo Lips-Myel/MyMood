@@ -243,6 +243,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
         return $this;
     }
 
+    #[Groups(['user:read'])]
+    public function getMoodScore(): ?int
+    {
+        return $this->hasMood ? $this->hasMood->getScore() : null;
+    }
+
+
     /**
      * @return Collection<int, CallAlerts>
      */
@@ -290,6 +297,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, JWTUser
     {
         return $this->cohortes;
     }
+
+    public function getCohortNames(): array
+{
+    return $this->cohortes->map(fn(Cohortes $cohort) => $cohort->getName())->toArray();
+}
+
 
     public function addCohort(Cohortes $cohorte): static
     {

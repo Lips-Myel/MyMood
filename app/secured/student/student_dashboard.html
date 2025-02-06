@@ -5,14 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MyMoodApp - Application de Visualisation d'Humeur</title>
         <link rel="stylesheet" href="./../../css/root.css">
-        <link rel="stylesheet" href="./../../css/index.css">
+        <link rel="stylesheet" href="./../../css/stagiaire.css">
     </head>
 <body>
+    <header><form action="/logout" method="POST">
+        <button type="submit" class="red-button">Déconnexion</button>
+    </form></header>
     <h1>MyMood</h1>
     <h2>Student_Dashboard</h2>
-    <form action="/logout" method="POST">
-        <button type="submit" class="red-button">Déconnexion</button>
-    </form>
+
+    <div class="paragraphe">
+        <p>Cet outil est conçu pour vous permettre de communiquer votre Mood.</p>
+        <p>Grace à ce Mood, nous savons si vous allez bien ou si vous avez besoin d’aide. En cas de besoin vous pouvez appuyer sur le bouton 
+            d’appel. Cela enverra une notification à votre formateur ainsi qu’a la médiation.</p>
+        <p>
+            En cas d’urgence, manifestez vous auprès de la personne de l’équipe la plus proche.
+        </p>
+    </div>
     
 </body>
 
