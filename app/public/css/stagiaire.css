@@ -37,20 +37,17 @@
 .paragraphe {
     font-family: var(--font-paragraphes);
     font-style: italic;
-<<<<<<< Updated upstream
 }
-=======
+
+
+
+
+h1{
+    margin-left: 156px; 
 }
 
 h2{
-    font-family: var(--font-paragraphes);
-    font-weight: bold;
-}
-
->>>>>>> Stashed changes
-
-
-h2{
+    margin-top: 90px;
     font-family: var(--font-paragraphes);
     font-weight: bold;
 }

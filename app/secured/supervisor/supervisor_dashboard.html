@@ -5,16 +5,56 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MyMoodApp - Application de Visualisation d'Humeur</title>
         <link rel="stylesheet" href="./../../css/root.css">
-        <link rel="stylesheet" href="./../../css/stagiaire.css">
+        <link rel="stylesheet" href="./../../css/supervisor_panel.css">
     </head>
-<body>
-    <header><form action="/logout" method="POST">
-        <button type="submit" class="red-button">Déconnexion</button>
-    </form></header>
-    <h1>MyMood</h1>
-    <h2>Supervisor_Dashboard</h2>
+    <body>
+        <header>
+            <h1>MyMoodApp</h1>
+            <form action="/logout" method="POST">
+                <button id="logout" type="submit" class="red-button">Déconnexion</button>
+            </form>
+        </header>
     
-</body>
+        <nav>
+            <h2>Formations</h2>
+            <ul>
+                <li class="group">
+                    <a href="?group=Front-End">Front-end</a>
+                    <input type="checkbox">
+                </li>
+            </ul>
+    
+            <div>
+                <input type="text" class="text-input" placeholder="Nouvelle formation">
+                <input type="submit" value="+">
+            </div>
+    
+            <h2>Groupes</h2>
+            <ul>
+                <li>Groupe 1</li>
+            </ul>
+    
+            <div>
+                <input type="text" class="text-input" placeholder="Nouveau groupe">
+                <input type="submit" value="+">
+            </div>
+    
+            <button class="red-button">Supprimer</button>
+            <button class="red-button">Gestion</button>
+        </nav>
+        <main>
+            <section>
+                <div id="group-banner">
+                    <p>Nombre alertes</p>
+                    <h2>Front-end</h2>
+                    <p>Mood Moyen</p>
+                </div>
+                <div>
+    
+                </div>
+            </section>
+        </main>
+    </body>
 
 
 </html>
