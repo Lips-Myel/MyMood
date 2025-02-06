@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    margin-left: 25vw;
+}
+
+#group-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}

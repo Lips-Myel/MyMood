@@ -1,0 +1,14 @@
+.group {
+    background-color: var(--color-imts-background);
+    padding: 8px;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    margin-left: 25vw;
+}
