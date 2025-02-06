@@ -5,6 +5,7 @@
 :root {
     --font-headings: "Josefin Sans", serif;
     --font-paragraphes: "Montserrat", serif;
+    font-family: var(--font-paragraphes);
 
     --color-imts-blue: #1E1C59;
     --color-imts-red: #D91E41;
@@ -24,6 +25,10 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--color-imts-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 /* texts */
@@ -79,6 +84,8 @@ p {
 
 /* header */
 header {
+    position: fixed;
+    top: 0;
     height: 72px;
     width: 100vw;
     background-color: var(--color-imts-blue);
