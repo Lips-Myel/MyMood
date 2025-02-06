@@ -5,7 +5,6 @@
 :root {
     --font-headings: "Josefin Sans", serif;
     --font-paragraphes: "Montserrat", serif;
-    font-family: var(--font-paragraphes);
 
     --color-imts-blue: #1E1C59;
     --color-imts-red: #D91E41;
@@ -25,20 +24,35 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--color-imts-background);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
 }
 
 /* texts */
 h1 {
-    font-family: var(--font-headings);
+    font-family: var(--font-paragraphes);
+    color: white;
+    margin: 0;
 }
 
-p {
+h2,
+h3,
+h4 {
+    font-family: var(--font-headings);
+    color: var(--color-imts-blue);
+}
+
+p,
+label,
+textarea {
     font-family: var(--font-paragraphes);
     font-size: 16px;
+    margin: 0;
+    color: var(--color-imts-blue);
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-imts-blue);
+    font-family: var(--font-paragraphes);
 }
 
 /* elements */
@@ -50,19 +64,6 @@ p {
     background-color: var(--color-imts-red);
     padding: 8px 24px;
     border: none;
-    border-radius: 2px;
-
-}
-
-.button {
-    /* Add text color */
-    font-family: var(--font-paragraphes);
-    font-weight: bold;
-
-    /* Add background color */
-    padding: 8px 24px;
-    border: none;
-    border-radius: 2px;
 }
 
 .text-input {
@@ -70,23 +71,40 @@ p {
 
     padding: 8px;
     border: none;
-    border-radius: 2px;
-
+    background-color: var(--color-imts-background);
+    border-bottom: solid 2px var(--color-imts-blue);
 }
 
 .white-zone {
     background-color: var(--color-white-background);
     box-shadow: var(--box-shadow);
-    border-radius: 8px;
     padding: 24px;
     color: var(--color-imts-blue);
 }
 
 /* header */
 header {
-    position: fixed;
-    top: 0;
     height: 72px;
     width: 100vw;
     background-color: var(--color-imts-blue);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
+
+nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 72px;
+    background-color: var(--color-white-background);
+    height: calc(100vh - 72px);
+    width: 20vw;
+    padding: 12px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+

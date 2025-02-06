@@ -7,30 +7,52 @@
     <link rel="stylesheet" href="./../../css/root.css">
     <link rel="stylesheet" href="./../../css/stagiaire.css">
     <style>
+<<<<<<< Updated upstream:app/secured/admin/create_user.html
+        body {
+            margin: 50px;
+=======
+        body{
+            font-family: var(--font-paragraphes);
+            
+>>>>>>> Stashed changes:app/secured/admin/create-user.html
+        }
         h2{
             font-family: var(--font-headings)
             
         }
         .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
+            margin: 100px auto;
+            display: flex;
+            flex-direction: column;
+
+            gap: 12px;
+
+            padding: 24px;
+            width: 50vw;
+            max-width: 256px;
+
+            background-color: var(--color-imts-blue);
+            border-radius: 8px;
+
+            color: white;
             font-family: var(--font-paragraphes);
         }
-        input, select {
+        .login-input {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
             width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        select{
+            option{font-family: var(--font-paragraphes);}
+            
+        }
+
+        #submit-button{
+            width: 100%;
         }
         
         .message {
@@ -41,11 +63,13 @@
             border: 1px solid #c3e6cb;
             border-radius: 5px;
             display: none;
+            font-family: var(--font-paragraphes)
         }
         .error {
             background-color: #f8d7da;
             color: #721c24;
             border-color: #f5c6cb;
+            font-family: var(--font-paragraphes)
         }
     </style>
 </head>
@@ -63,27 +87,27 @@
     <div class="form-container">
         <h2>Créer un utilisateur</h2>
         <form id="createUserForm">
-            <div class="form-group">
+            <div class="login-input">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email"  class="text-input" placeholder="Email"required>
             </div>
-            <div class="form-group">
+            <div class="login-input">
                 <label for="firstName">Prénom</label>
-                <input type="text" id="firstName" name="firstName" required>
+                <input type="text" id="firstName" name="firstName" class="text-input" placeholder="Prénom" required>
             </div>
-            <div class="form-group">
+            <div class="login-input">
                 <label for="lastName">Nom</label>
-                <input type="text" id="lastName" name="lastName" required>
+                <input type="text" id="lastName" name="lastName" class="text-input" placeholder="Nom"required>
             </div>
-            <div class="form-group">
+            <div class="login-input">
                 <label for="hasRole">Rôle</label>
-                <select id="role" name="hasRole" required>
+                <select id="role" name="hasRole" class="text-input" required>
                     <option value=4>Étudiant</option>
                     <option value=5>Superviseur</option>
                     <option value=6>Administrateur</option>
                 </select>
             </div>
-            <button class="red-button" type="submit">Créer l'utilisateur</button>
+            <button id="submit-button" class="red-button" type="submit">Créer l'utilisateur</button>
         </form>
 
         <div class="message" id="responseMessage"></div>

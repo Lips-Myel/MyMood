@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyMoodApp - Application de visualisation d'humeur</title>
+
+    <link rel="stylesheet" href="../css/root.css">
+    <link rel="stylesheet" href="css/admin-panel.css">
+</head>
+
+<body>
+    <header>
+        <h1>MyMoodApp</h1>
+    </header>
+
+        <nav>
+            <h2>Formations</h2>
+            <ul>
+                <li class="group">
+                    <a href="?group=Front-End">Front-end</a>
+                    <input type="checkbox">
+                </li>
+            </ul>
+    
+            <div>
+                <input type="text" class="text-input" placeholder="Nouvelle formation">
+                <input type="submit" value="+">
+            </div>
+    
+            <h2>Groupes</h2>
+            <ul>
+                <li>Groupe 1</li>
+            </ul>
+    
+            <div>
+                <input type="text" class="text-input" placeholder="Nouveau groupe">
+                <input type="submit" value="+">
+            </div>
+    
+            <button class="red-button">Supprimer</button>
+            <button class="red-button">Gestion</button>
+        </nav>
+
+        <main>
+            <section>
+                <h2>Ajouter un stagiare</h2>
+
+                <form>
+                    <input type="text" placeholder="Prénom" class="text-input">
+                    <input type="text" placeholder="Nom" class="text-input">
+                    <input type="" class="text-input">
+                    <input type="email" placeholder="Adresse mail" class="text-input">
+                    <input type="submit" value="+">
+                </form>
+            </section>
+
+            <section>
+                <h2>Liste des stagiaires</h2>
+                <ul>
+                    <li>
+                        <form>
+                            <input type="text" placeholder="Prénom" class="text-input">
+                            <input type="text" placeholder="Nom" class="text-input">
+                            <input type="" class="text-input">
+                            <input type="email" placeholder="Adresse mail" class="text-input">
+                            <input type="checkbox">
+                        </form>
+                    </li>
+                </ul>
+            </section>
+        </main>
+</body>
+
+</html>
